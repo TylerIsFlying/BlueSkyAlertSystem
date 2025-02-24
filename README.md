@@ -2,7 +2,7 @@ For the program to work you will need to make a blue sky account on https://bsky
 
 After making the blue sky account you will enter your user name for the account and password for the account in a .env file.
 
-In the .env file it should be for example: 
+Inside the .env file it should be for example: 
 
 CLIENT_USERNAME="test.bsky.social"
 CLIENT_PASSWORD="somepasswordhere123"
