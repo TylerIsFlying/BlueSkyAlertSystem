@@ -3,8 +3,8 @@ from bs4 import BeautifulSoup
 import cloudscraper
 import asyncio
 import feedparser
-from scrape import site_scrape_execute
-from scrape import SiteScraperResults
+from scrape_handler import site_scrape_execute
+from scrape_handler import SiteScraperResults
 
 
 # Initial Bypass method using cloudscrapper
@@ -59,5 +59,5 @@ def rss_feed():
 
 
 if __name__ == '__main__':
-    #asyncio.run(scrape_la_feed(0))
-    rss_feed()
+    asyncio.run(scrape_la_feed(0))
+    #rss_feed()
