@@ -4,7 +4,7 @@ import importlib
 
 
 class SiteScraperResult:
-    def __init__(self, name: str = None, title: str = None, url: str = None, body: str = None):
+    def __init__(self, name: str, title: str, url: str, body: str):
         self.name = name
         self.title = title
         self.url = url
@@ -32,7 +32,7 @@ class SiteScraperResult:
 
 
 class SiteScraperResults:
-    def __init__(self, name: str = None, titles: [str] = None, urls: [str] = None, bodys: [str] = None):
+    def __init__(self, name: str, titles: [str], urls: [str], bodys: [str]):
         self.name = name
         self.titles = titles
         self.urls = urls
@@ -79,7 +79,6 @@ registered_scraper_results = []
 def site_scrape_execute(func):
     """Decorator to register scrape function"""
     registered_scraper_results.append(func)
-    return func
 
 
 class SiteScrapeReceiver:

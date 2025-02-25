@@ -23,7 +23,8 @@ def fetch_page_bypass(url):
 
 @site_scrape_execute
 async def scrape_la_feed(page: int):
-    base_url = f'https://lafd.org/alerts?page={page}'
+    # Starts on la at 0th page
+    base_url = f'https://lafd.org/alerts?page={page + 1}'
     name = 'los angeles'
     bypass_url = fetch_page_bypass(base_url)
     soup = BeautifulSoup(bypass_url, 'html.parser')
@@ -60,4 +61,3 @@ def rss_feed():
 
 if __name__ == '__main__':
     asyncio.run(scrape_la_feed(0))
-    #rss_feed()
