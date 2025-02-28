@@ -5,6 +5,7 @@ import asyncio
 import feedparser
 from scrape_handler import site_scrape_execute
 from scrape_handler import SiteScraperResults
+from functools import cache
 
 
 # Initial Bypass method using cloudscrapper
@@ -22,9 +23,10 @@ def fetch_page_bypass(url):
 
 
 @site_scrape_execute
+@cache
 async def scrape_la_feed(page: int):
     # Starts on la at 0th page
-    base_url = f'https://lafd.org/alerts?page={page + 1}'
+    base_url = f'https://lafd.org/alerts?page={page - 1}'
     name = 'los angeles'
     bypass_url = fetch_page_bypass(base_url)
     soup = BeautifulSoup(bypass_url, 'html.parser')
