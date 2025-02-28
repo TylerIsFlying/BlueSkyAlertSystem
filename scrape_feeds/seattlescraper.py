@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from scrape_handler import site_scrape_execute
 from scrape_handler import SiteScraperResults
 import asyncio
+from functools import cache
 
 
 def fetch_page_bypass(url):
@@ -19,6 +20,7 @@ def fetch_page_bypass(url):
 
 
 @site_scrape_execute
+@cache
 async def scrape_seattle_feed(page: int) -> SiteScraperResults:
     bypass_url = fetch_page_bypass(f'https://alert.seattle.gov/page/{page}')
     name = 'seattle'
