@@ -33,6 +33,9 @@ async def main():
         text_build.text(f'Alert ')
         text_build.text(f"({d.get_name().title()}): ")
         text_build.link(d.get_title().title(), d.get_url().title())
+        # BlueSky has character limit of 300
+        if len(text_build.build_text()) > 300:
+            continue
         if not str(text_build.build_text()) in posts:
             client.send_post(text_build)
 
