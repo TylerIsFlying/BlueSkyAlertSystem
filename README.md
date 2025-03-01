@@ -4,8 +4,8 @@ After making the blue sky account you will enter your user name for the account 
 
 Inside the .env file it should be for example: 
 
-CLIENT_USERNAME="test.bsky.social"
+CLIENT_USERNAME=test.bsky.social
 
-CLIENT_PASSWORD="somepasswordhere123"
+CLIENT_PASSWORD=somepasswordhere123
 
 Currently still in development and working on it. 
