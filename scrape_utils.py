@@ -1,6 +1,6 @@
 import cloudscraper
 
-
+# Initial Bypass method using cloudscrapper
 def fetch_page_bypass(url):
     scraper = cloudscraper.create_scraper()
     response = scraper.get(url)

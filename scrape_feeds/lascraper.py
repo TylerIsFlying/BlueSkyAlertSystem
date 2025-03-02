@@ -2,13 +2,9 @@ from bs4 import BeautifulSoup
 from scrape_utils import fetch_page_bypass, transform_elements_to_text
 import asyncio
 from scrape_handler import site_scrape_execute, SiteScraperResults
-from functools import cache
 
-
-# Initial Bypass method using cloudscrapper
 
 @site_scrape_execute
-@cache
 async def scrape_la_feed(page: int):
     # Starts on la at 0th page
     base_url = f'https://lafd.org/alerts?page={page - 1}'
