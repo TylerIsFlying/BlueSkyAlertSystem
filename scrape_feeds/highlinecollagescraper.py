@@ -5,6 +5,7 @@ from scrape_utils import fetch_page_bypass, transform_elements_to_text
 
 @site_scrape_execute
 async def scrape(page: int) -> SiteScraperResults:
+    """Scrapes the results from the highline alerts site"""
     bypass_url = fetch_page_bypass(f'https://highlinealerts.highline.edu/alerts/page/{page}')
     name = 'Highline College'
     soup = BeautifulSoup(bypass_url, 'html.parser')

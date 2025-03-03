@@ -1,5 +1,3 @@
-import time
-
 from atproto import Client
 from atproto import client_utils
 import asyncio
@@ -11,7 +9,7 @@ from scrape_handler import SiteScraperResult
 from itertools import chain
 
 
-async def main():
+async def main() -> None:
     client = Client()
     load_dotenv()
     username = os.getenv('CLIENT_USERNAME')
@@ -28,11 +26,11 @@ async def main():
     if len(posts) >= max_posts_before_purge:
         await purge_posts(client, feed)
 
-    for d in data:
+    for scraper_result in data:
         text_build = client_utils.TextBuilder()
         text_build.text(f'Alert ')
-        text_build.text(f"({d.get_name().title()}): ")
-        text_build.link(d.get_title().title(), d.get_url().title())
+        text_build.text(f"({scraper_result.get_name().title()}): ")
+        text_build.link(scraper_result.get_title().title(), scraper_result.get_url().title())
         # BlueSky has character limit of 300
         if len(text_build.build_text()) > 300:
             continue
@@ -40,7 +38,7 @@ async def main():
             client.send_post(text_build)
 
 
-async def purge_posts(client: Client, feed: Response):
+async def purge_posts(client: Client, feed: Response) -> None:
     for post in feed['feed']:
         client.delete_post(post['post']['uri'])
 

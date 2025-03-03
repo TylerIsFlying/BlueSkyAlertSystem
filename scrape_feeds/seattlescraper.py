@@ -8,6 +8,7 @@ from scrape_utils import fetch_page_bypass, transform_elements_to_text
 
 @site_scrape_execute
 async def scrape_seattle_feed(page: int) -> SiteScraperResults:
+    """Scrapes the results from the seattle alerts site"""
     bypass_url = fetch_page_bypass(f'https://alert.seattle.gov/page/{page}')
     name = 'seattle'
     soup = BeautifulSoup(bypass_url, 'html.parser')

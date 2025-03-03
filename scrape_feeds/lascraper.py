@@ -5,7 +5,8 @@ from scrape_handler import site_scrape_execute, SiteScraperResults
 
 
 @site_scrape_execute
-async def scrape_la_feed(page: int):
+async def scrape_la_feed(page: int) -> SiteScraperResults:
+    """Scrapes the results from the la alerts site"""
     # Starts on la at 0th page
     base_url = f'https://lafd.org/alerts?page={page - 1}'
     name = 'los angeles'

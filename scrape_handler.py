@@ -10,16 +10,16 @@ class SiteScraperResult:
         self.url = url
         self.body = body
 
-    def get_title(self):
+    def get_title(self) -> str:
         return self.title.lower()
 
-    def get_name(self):
+    def get_name(self) -> str:
         return self.name.lower()
 
-    def get_url(self):
+    def get_url(self) -> str:
         return self.url.lower()
 
-    def get_body(self):
+    def get_body(self) -> str:
         return self.body.lower()
 
     def __repr__(self):
@@ -38,16 +38,16 @@ class SiteScraperResults:
         self.urls = urls
         self.bodys = bodys
 
-    def get_titles(self):
+    def get_titles(self) -> list[str]:
         return self.titles
 
-    def get_name(self):
+    def get_name(self) -> str:
         return self.name.lower()
 
-    def get_urls(self):
+    def get_urls(self) -> list[str]:
         return self.urls
 
-    def get_bodys(self):
+    def get_bodys(self) -> list[str]:
         return self.bodys
 
     def make_single_results(self) -> list[SiteScraperResult]:
@@ -76,7 +76,7 @@ class SiteScraperResults:
 registered_scraper_results = []
 
 
-def site_scrape_execute(func):
+def site_scrape_execute(func) -> None:
     """Decorator to register scrape function"""
     registered_scraper_results.append(func)
 
@@ -89,7 +89,7 @@ class SiteScrapeReceiver:
 
         for func in registered_scraper_results:
             result = await func(*args, **kwargs)
-            # Could have a scraper function that returns a list of SiteScraperResult so we combine it.
+            # Could have a scraper function that returns a list of SiteScraperResult, so we combine it.
             if isinstance(result, list) and all(isinstance(r, SiteScraperResults) for r in result):
                 results.extend(result)
             elif isinstance(result, SiteScraperResults):
@@ -100,24 +100,7 @@ class SiteScrapeReceiver:
         return results
 
     @staticmethod
-    async def load_result(*args, **kwargs) -> list[SiteScraperResult]:
-        """Executes all decorated functions and gets SiteScraperResult instances."""
-        results = []
-
-        for func in registered_scraper_results:
-            result = func(*args, **kwargs)
-            # Could have a scraper function that returns a list of SiteScraperResult so we combine it.
-            if isinstance(result, list) and all(isinstance(r, SiteScraperResult) for r in result):
-                results.extend(result)
-            elif isinstance(result, SiteScraperResult):
-                results.append(result)
-            else:
-                raise ValueError(f"Function {func.__name__} must return a SiteScraperResult or list of it.")
-
-        return results
-
-    @staticmethod
-    async def register(module_name: str):
+    async def register(module_name: str) -> None:
         """Imports dynamically all modules in a package decorated with @site_scrape_execute"""
         package = importlib.import_module(module_name)
         for _, module_name, _ in pkgutil.iter_modules(package.__path__):

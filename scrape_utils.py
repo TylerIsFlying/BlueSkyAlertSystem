@@ -5,7 +5,6 @@ def fetch_page_bypass(url):
     scraper = cloudscraper.create_scraper()
     response = scraper.get(url)
 
-    coi: int = 1
     # Response code from website: 200 means that the website returned a successful response
     if response.status_code == 200:
         return response.content
